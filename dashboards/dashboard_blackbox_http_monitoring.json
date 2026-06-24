@@ -5,8 +5,8 @@
     "name": "adfrnlr",
     "namespace": "default",
     "uid": "ee4f1ed2-0864-474a-adf9-31f33712a4f8",
-    "resourceVersion": "1782262955618012",
-    "generation": 13,
+    "resourceVersion": "1782263334481980",
+    "generation": 16,
     "creationTimestamp": "2026-06-24T00:42:03Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "2429626563174400"
@@ -16,7 +16,7 @@
       "grafana.app/folder": "",
       "grafana.app/saved-from-ui": "Grafana v13.1.0 (b309c9bb3b)",
       "grafana.app/updatedBy": "user:efq1831i3cxkwc",
-      "grafana.app/updatedTimestamp": "2026-06-24T01:02:35Z"
+      "grafana.app/updatedTimestamp": "2026-06-24T01:08:54Z"
     }
   },
   "spec": {
@@ -501,16 +501,34 @@
               "fieldConfig": {
                 "defaults": {
                   "displayName": "${__field.labels.instance}",
+                  "decimals": 0,
+                  "min": 0,
+                  "max": 1,
+                  "mappings": [
+                    {
+                      "type": "value",
+                      "options": {
+                        "0": {
+                          "text": "Down",
+                          "index": 0
+                        },
+                        "1": {
+                          "text": "Up",
+                          "index": 1
+                        }
+                      }
+                    }
+                  ],
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
                       {
                         "value": 0,
-                        "color": "green"
+                        "color": "red"
                       },
                       {
-                        "value": 80,
-                        "color": "red"
+                        "value": 1,
+                        "color": "green"
                       }
                     ]
                   },
