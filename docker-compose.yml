@@ -17,6 +17,7 @@ services:
       - "3000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
     depends_on:
       - prometheus
 
@@ -37,16 +38,16 @@ services:
       - "--config.file=/etc/blackbox_exporter/config.yml"
 
   altice-exporter:
-    build: ./altice-exporter
+    build:
+      context: ./tools/altice-exporter
+      dockerfile: Dockerfile.local
     container_name: altice-exporter
-    ports:
-      - "127.0.0.1:9876:9876"
+    env_file:
+      - /etc/altice-exporter.env
     command:
       - "--device.type=GR241AG"
       - "--device.hostname=192.168.1.254:22"
-      - "--device.username=${ALTICE_USERNAME}"
-      - "--device.password=${ALTICE_PASSWORD}"
-      - "--web.listen-address=:9876"
+      - "--web.listen-address=0.0.0.0:9876"
     restart: unless-stopped
 
 volumes:

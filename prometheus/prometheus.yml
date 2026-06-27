@@ -29,12 +29,6 @@ scrape_configs:
       - target_label: __address__
         replacement: blackbox-exporter:9115
 
-      - source_labels: [__param_target]
-        target_label: instance
-
-      - target_label: __address__
-        replacement: blackbox-exporter:9115
-
   - job_name: "blackbox-router-http"
     metrics_path: /probe
     params:
@@ -83,7 +77,6 @@ scrape_configs:
           - github.com:443
           - 192.168.1.254:80
           - 192.168.1.254:443
-          - 192.168.1.254:53
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -96,4 +89,4 @@ scrape_configs:
 
   - job_name: "altice-exporter"
     static_configs:
-      - targets: ["host.docker.internal:9876"]
+      - targets: ["altice-exporter:9876"]
