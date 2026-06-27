@@ -36,6 +36,19 @@ services:
     command:
       - "--config.file=/etc/blackbox_exporter/config.yml"
 
+  altice-exporter:
+    build: ./altice-exporter
+    container_name: altice-exporter
+    ports:
+      - "127.0.0.1:9876:9876"
+    command:
+      - "--device.type=GR241AG"
+      - "--device.hostname=192.168.1.254:22"
+      - "--device.username=${ALTICE_USERNAME}"
+      - "--device.password=${ALTICE_PASSWORD}"
+      - "--web.listen-address=:9876"
+    restart: unless-stopped
+
 volumes:
   prometheus_data:
   grafana_data:
